@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Polyline, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
@@ -24,6 +24,28 @@ const createCustomIcon = (color) => {
 const orangeIcon = createCustomIcon('#FF6B35');
 const blueIcon = createCustomIcon('#004E98');
 const dualIcon = createCustomIcon('#7B2CBF'); // Purple for stops serving both routes
+
+// Add CSS for custom tooltip styling
+const tooltipStyle = document.createElement('style');
+tooltipStyle.textContent = `
+  .custom-tooltip {
+    background: none;
+    border: none;
+    box-shadow: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 12px;
+    text-shadow: -1px -1px 0 #fff, 
+                  1px -1px 0 #fff, 
+                  -1px 1px 0 #fff, 
+                  1px 1px 0 #fff;
+    white-space: nowrap;
+  }
+  .custom-tooltip::before {
+    display: none;
+  }
+`;
+document.head.appendChild(tooltipStyle);
 
 function Map() {
   const [accessibilityPoints, setAccessibilityPoints] = useState([]);
@@ -298,6 +320,14 @@ function Map() {
           position={[stop.latitude, stop.longitude]}
           icon={getStopIcon(stop.routes)}
         >
+          <Tooltip 
+            permanent={true}
+            direction="top"
+            offset={[0, -12]}
+            className="custom-tooltip"
+          >
+            {stop.name}
+          </Tooltip>
           <Popup>
             <div style={{ minWidth: '320px', maxHeight: '450px', overflowY: 'auto' }}>
               <h3 style={{ margin: '0 0 5px 0' }}>{stop.name}</h3>
