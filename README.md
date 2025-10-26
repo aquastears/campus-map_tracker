@@ -4,12 +4,11 @@ A Progressive Web App that helps students navigate campus using real-time access
 
 ## Overview
 
-This application provides an interactive map showing accessible entrances, elevators, ramps, and bus stops across campus. Built as a PWA, it works offline and can be installed on any device for quick access.
+This application provides an interactive map showing bus routes. Built as a PWA, it works offline and can be installed on any device for quick access.
 
 ## Features
 
 - Interactive campus map with accessibility markers
-- Color-coded location types (entrances, elevators, ramps, bus stops)
 - Installable on mobile devices (iOS and Android)
 - Offline functionality
 - Responsive design for all screen sizes
