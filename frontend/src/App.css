@@ -22,9 +22,21 @@ body, html, #root {
   background: linear-gradient(135deg, #2a46c2 0%, #f08c00 100%);
   color: white;
   padding: 1.5rem 2rem;
-  text-align: center;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   z-index: 1000;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-text {
+  flex: 1;
 }
 
 .app-header h1 {
@@ -37,6 +49,22 @@ body, html, #root {
   font-size: 0.9rem;
   opacity: 0.95;
   margin: 0;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .app-header {
+    padding: 1rem 1.5rem;
+  }
+
+  .header-text h1 {
+    font-size: 1.3rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .header-text .subtitle {
+    font-size: 0.8rem;
+  }
 }
 
 .map-container {
