@@ -57,6 +57,9 @@ cd frontend
 vercel --prod
 ```
 
+## Vercel Project Link
+https://campus-bus-kuxarh0ud-sebastians-projects-04e22bf6.vercel.app/
+
 ## Project Structure
 
 ```
