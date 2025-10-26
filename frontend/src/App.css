@@ -43,6 +43,16 @@ body, html, #root {
   font-size: 1.8rem;
   margin: 0 0 0.5rem 0;
   font-weight: 600;
+  /*----------------------*/
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.app-logo {
+  height: 2rem;
+  width: auto;
+  /*---------------------------*/
 }
 
 .app-header .subtitle {
