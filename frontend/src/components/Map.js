@@ -52,7 +52,7 @@ function Map() {
   const [busStops, setBusStops] = useState([]);
 
   // Default center - Syracuse University
-  const campusCenter = [43.0481, -76.1474];
+  const campusCenter = [43.039756655719486, -76.13515884479717];
 
   useEffect(() => {
     setBusStops([
@@ -305,7 +305,7 @@ function Map() {
     <div style={{ position: 'relative', height: '100%', width: '100%' }}>
       <MapContainer 
         center={campusCenter} 
-        zoom={15} 
+        zoom={16} 
         style={{ height: '100%', width: '100%' }}
       >
       <TileLayer
