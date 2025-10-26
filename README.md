@@ -10,7 +10,6 @@ This application provides an interactive map showing bus routes. Built as a PWA,
 
 - Interactive campus map with accessibility markers
 - Installable on mobile devices (iOS and Android)
-- Offline functionality
 - Responsive design for all screen sizes
 
 ## Technology
