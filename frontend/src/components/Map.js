@@ -23,7 +23,8 @@ const createCustomIcon = (color) => {
 
 const orangeIcon = createCustomIcon('#FF6B35');
 const blueIcon = createCustomIcon('#004E98');
-const dualIcon = createCustomIcon('#7B2CBF'); // Purple for stops serving both routes
+const euclidIcon = createCustomIcon('#10B981'); // Green for Euclid Loop
+const multiIcon = createCustomIcon('#7B2CBF'); // Purple for stops serving multiple routes
 
 // Add CSS for custom tooltip styling
 const tooltipStyle = document.createElement('style');
@@ -145,10 +146,11 @@ function Map() {
         latitude: 43.03720581321301,
         longitude: -76.13150015469904,
         accessible: true,
-        routes: ['Orange Loop', 'Blue Loop'],
+        routes: ['Orange Loop', 'Blue Loop', 'Euclid Loop'],
         schedules: {
           'Orange Loop': ["6:59", "7:39", "8:19", "8:59", "9:39", "10:19", "10:59", "11:39", "12:19", "12:59", "1:39", "2:19", "2:59", "3:39", "4:19", "4:59", "5:39", "6:19", "6:59", "7:39", "8:19", "8:59"],
-          'Blue Loop': ["7:20", "8:00", "8:40", "9:20", "10:00", "10:40", "11:20", "12:00", "12:40", "1:20", "2:00", "2:40", "3:20", "4:00", "4:40", "5:20", "6:00", "6:40", "7:20", "8:00", "8:40", "9:20"]
+          'Blue Loop': ["7:20", "8:00", "8:40", "9:20", "10:00", "10:40", "11:20", "12:00", "12:40", "1:20", "2:00", "2:40", "3:20", "4:00", "4:40", "5:20", "6:00", "6:40", "7:20", "8:00", "8:40", "9:20"],
+          'Euclid Loop': ["7:30 PM", "7:55 PM", "8:00 PM", "8:25 PM", "8:30 PM", "8:55 PM", "9:00 PM", "9:25 PM", "9:30 PM", "9:55 PM", "10:00 PM", "10:25 PM", "10:30 PM", "10:55 PM", "11:00 PM", "11:25 PM", "11:30 PM", "11:55 PM", "12:00 AM", "12:25 AM", "12:30 AM", "12:55 AM", "1:00 AM", "1:25 AM", "1:30 AM", "1:55 AM", "2:00 AM", "2:25 AM", "2:30 AM", "2:50 AM"]
         }
       },
       {
@@ -289,16 +291,71 @@ function Map() {
         schedules: {
           'Blue Loop': ["7:25", "8:05", "8:45", "9:25", "10:05", "10:45", "11:25", "12:05", "12:45", "1:25", "2:05", "2:45", "3:25", "4:05", "4:45", "5:25", "6:05", "6:45", "7:25", "8:05", "8:45", "9:25"]
         }
-      }
+      },
+
+      // Euclid Loop exclusive stops (late night Sun-Sat)
+      {
+        id: 21,
+        name: 'Genesee Irving',
+        latitude: 43.046994349830065,
+        longitude: -76.13790701611553,
+        accessible: true,
+        routes: ['Euclid Loop'],
+        schedules: {
+          'Euclid Loop': ["7:37 PM", "8:07 PM", "8:37 PM", "9:07 PM", "9:37 PM", "10:07 PM", "10:37 PM", "11:07 PM", "11:37 PM", "12:07 AM", "12:37 AM", "1:07 AM", "1:37 AM", "2:07 AM", "2:37 AM"]
+        }
+      },
+      {
+        id: 22,
+        name: 'Genesee Crouse',
+        latitude: 43.04688957347814,
+        longitude: -76.13654729866585,
+        accessible: true,
+        routes: ['Euclid Loop'],
+        schedules: {
+          'Euclid Loop': ["7:38 PM", "8:08 PM", "8:38 PM", "9:08 PM", "9:38 PM", "10:08 PM", "10:38 PM", "11:08 PM", "11:38 PM", "12:08 AM", "12:38 AM", "1:08 AM", "1:38 AM", "2:08 AM", "2:38 AM"]
+        }
+      },
+      {
+        id: 23,
+        name: 'Genesee Westcott',
+        latitude: 43.04543023118054,
+        longitude: -76.11961725127422,
+        accessible: true,
+        routes: ['Euclid Loop'],
+        schedules: {
+          'Euclid Loop': ["7:42 PM", "8:12 PM", "8:42 PM", "9:12 PM", "9:42 PM", "10:12 PM", "10:42 PM", "11:12 PM", "11:42 PM", "12:12 AM", "12:42 AM", "1:12 AM", "1:42 AM", "2:12 AM", "2:42 AM"]
+        }
+      },
+      {
+        id: 24,
+        name: 'Westcott Euclid',
+        latitude: 43.036898469866316,
+        longitude: -76.11898602531305,
+        accessible: true,
+        routes: ['Euclid Loop'],
+        schedules: {
+          'Euclid Loop': ["7:46 PM", "8:16 PM", "8:46 PM", "9:16 PM", "9:46 PM", "10:16 PM", "10:46 PM", "11:16 PM", "11:46 PM", "12:16 AM", "12:46 AM", "1:16 AM", "1:46 AM", "2:16 AM", "2:46 AM"]
+        }
+      },
     ]);
   }, []);
 
   // Function to get the appropriate icon based on routes
   const getStopIcon = (routes) => {
-    if (routes.length === 2) return dualIcon;
+    if (routes.length > 1) return multiIcon;
     if (routes.includes('Orange Loop')) return orangeIcon;
     if (routes.includes('Blue Loop')) return blueIcon;
+    if (routes.includes('Euclid Loop')) return euclidIcon;
     return null;
+  };
+
+  // Function to get route color
+  const getRouteColor = (routeName) => {
+    if (routeName === 'Orange Loop') return '#FF6B35';
+    if (routeName === 'Blue Loop') return '#004E98';
+    if (routeName === 'Euclid Loop') return '#10B981';
+    return '#6c757d';
   };
 
   return (
@@ -339,7 +396,8 @@ function Map() {
                       display: 'inline-block',
                       padding: '2px 8px',
                       marginRight: '5px',
-                      backgroundColor: route === 'Orange Loop' ? '#FF6B35' : '#004E98',
+                      marginBottom: '3px',
+                      backgroundColor: getRouteColor(route),
                       color: 'white',
                       borderRadius: '3px',
                       fontSize: '0.85em',
@@ -356,10 +414,15 @@ function Map() {
               {Object.entries(stop.schedules).map(([routeName, times]) => (
                 <div key={routeName} style={{ marginTop: '12px' }}>
                   <strong style={{ 
-                    color: routeName === 'Orange Loop' ? '#FF6B35' : '#004E98' 
+                    color: getRouteColor(routeName)
                   }}>
                     {routeName} Schedule:
                   </strong>
+                  {routeName === 'Euclid Loop' && (
+                    <div style={{ fontSize: '0.8em', fontStyle: 'italic', color: '#666' }}>
+                      (Sun-Sat evenings)
+                    </div>
+                  )}
                   <div style={{ 
                     display: 'grid', 
                     gridTemplateColumns: 'repeat(4, 1fr)', 
@@ -370,7 +433,7 @@ function Map() {
                       <div key={index} style={{ 
                         padding: '3px 5px',
                         backgroundColor: '#f8f9fa',
-                        border: `1px solid ${routeName === 'Orange Loop' ? '#FF6B35' : '#004E98'}`,
+                        border: `1px solid ${getRouteColor(routeName)}`,
                         borderRadius: '3px',
                         textAlign: 'center',
                         fontSize: '0.85em'
@@ -401,6 +464,10 @@ function Map() {
         <div style={{ display: 'flex', alignItems: 'center', marginBottom: 6 }}>
           <div style={{ width: 12, height: 12, background: '#7B2CBF', borderRadius: 3, marginRight: 8 }} />
           <span>Purple = combined stops</span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: 6 }}>
+          <div style={{ width: 12, height: 12, background: '#10B981', borderRadius: 3, marginRight: 8 }} />
+          <span>Green = Euclid Loop only</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', marginBottom: 6 }}>
           <div style={{ width: 12, height: 12, background: '#FF6B35', borderRadius: 3, marginRight: 8 }} />
